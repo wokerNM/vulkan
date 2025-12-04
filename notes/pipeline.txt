@@ -1,0 +1,29 @@
+Pipline:
+    A graphics pipline is like a factory, each step in the pipeline takes data and further refines it until it is eventually a product (image).
+        Stage 1: Input Assembler
+            Takes as input a list of numbers and groups them together into geometry. For example, if 12 numbers are given to make triangles, the first 6 are used to make one, the second are made 
+            to make a second triangle. For visualisation,  numbers 1 and 2 make  verticie 1 in triangle 1, 3 and 4 make verticie 2 in triangle 1, 5 and 6 make verticie 3 in triangle 1, 7 and 8 make 
+            verticie 1 in triangle 2, 9 and 10 make verticie 2 in triangle 2, and 11 and 12 make verticie 3 in triangle 2.
+
+        Step 2: Vertex Shader
+            The Vertex Shader procceses each vertex individually and performs transformations such as rotations, movement, and translations.
+
+        Step 3: Rasterization
+            This stage breaks up the geometry into fragments for each pixel the triangle overlaps. 
+
+        Step 4: Fragment Shader
+            The Fragment Shader procceses each fragment individually and outputs values such as the colour by using interpolated data from things like textures normals and lighting.
+
+        Step 5: Color Blending
+            This stage applies operations to mix the values from multiple fragments that correspond to the same pixel (makes a gradient effect when different things overlap)
+
+There are 2 types of stages, fixed functions: 
+    The Input Assembler, Rasterization, and Color Blending stages are all fixed functions. 
+        We have less control over what operations these stages do, but can configure each stage by setting variables that modify their behaviour. 
+
+        Configuring this is described in pipelineconf.txt
+
+    Programmable:
+        For these stages, we have the ability to upload our own code to be executed by the GPU. These little programs that live on the GPU are called shaders, and can be written in a C-like language 
+        called GLSL.
+

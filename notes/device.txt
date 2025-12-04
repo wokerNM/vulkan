@@ -1,0 +1,30 @@
+Device Class (lve_device.hpp and lve_device.cpp): 
+    First in it's constructor, a vulkan instance is created, which initializes the vulkan library and is the connection between the app and vulkan. 
+
+    Next, validation layers 
+    (extra error checking becuase vulkan doesn't have a lot of that by default). Remove validation layers in release builds where performance is critical.
+
+    Next, a surface is made which relies on glfw and is the connection between the window and vulkans ability to display results.
+
+    Next, the physical device the app uses is decided (the GPU/iGPU)
+
+    Next, a logical device is created which describes what features of the device the program wants to use.
+
+    Finally, it's convienent to setup the command pool for later use, which will help with command buffer allocation.
+
+"LveDevice &lveDeice" Description
+    Could be memory unsafe if our device (GPU) is released from memory before the pipeline (assembly line), this could still be attempted to be dereferenced, which would cause a crash. So the only 
+    time a reference type  member (a variable that is part of a class/object and is a reference (has & before it)) is when there is an implied relationship that the meber variable (in this case the 
+    device) will outlive any instances of the containing class (the class that it is a member of) that depend on it. So it should only be used when it's implied that it will last past the class that
+    it's part of that depends on it. This is because a pipeline NEEDS a device to exist.
+
+VkPipeline graphicsPipeline is the handle (interface I think) to the pipeline object.
+
+VkShaderModule vertShaderModule (for vertex shader)
+VkShaderModule fragShaderModule (for fragment shader)
+
+Since the pipeline class is responsible for managing the lifetime of these things, a destructor (~LvePipeline() {})  is made. Also, the copy constructors are deleted now do avoid duplicating
+the pointers to the vulkan objects.
+
+static PipelineConfigInfo defaultPipelineConfigInfo(uint32_t width, uint32_t height):
+    creates default pipeline config.

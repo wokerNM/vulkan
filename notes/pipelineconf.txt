@@ -1,0 +1,4 @@
+PipelineConfigInfo
+    This containst the data specifying how the pipeline will be configured. The reason this info is stored in the pipeline class is that the application should be easily able to configure the 
+    pipeline completely, as well as to share that configuration between multiple pipelines. 
+    To recap, if the pipeline is a factory assembly line, PipelineConfigInfo is the instructions.
