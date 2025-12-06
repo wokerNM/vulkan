@@ -1,10 +1,10 @@
 #pragma once
 
 #include "lve_device.hpp"
-#include <cstdint>
+
+// std
 #include <string>
 #include <vector>
-#include <vulkan/vulkan_core.h>
 
 namespace lve {
 
@@ -21,10 +21,11 @@ struct PipelineConfigInfo {
         VkRenderPass renderPass = nullptr;
         uint32_t subpass = 0;
 };
+
 class LvePipeline {
     public:
-        LvePipeline(LveDevice &device, const std::string &vertFilePath,
-                    const std::string &fragFilePath,
+        LvePipeline(LveDevice &device, const std::string &vertFilepath,
+                    const std::string &fragFilepath,
                     const PipelineConfigInfo &configInfo);
         ~LvePipeline();
 
@@ -37,10 +38,9 @@ class LvePipeline {
     private:
         static std::vector<char> readFile(const std::string &filepath);
 
-        void createGraphicsPipeline(const std::string &vertFilePath,
-                                    const std::string &fragFilePath,
+        void createGraphicsPipeline(const std::string &vertFilepath,
+                                    const std::string &fragFilepath,
                                     const PipelineConfigInfo &configInfo);
-
         void createShaderModule(const std::vector<char> &code,
                                 VkShaderModule *shaderModule);
 
