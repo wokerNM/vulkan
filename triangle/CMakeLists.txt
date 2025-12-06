@@ -21,6 +21,7 @@ src/lve_window.cpp
 src/lve_pipeline.cpp
 src/first_app.cpp
 src/lve_device.cpp
+src/lve_swap_chain.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}

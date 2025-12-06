@@ -4,16 +4,29 @@
 #include <cstdint>
 #include <string>
 #include <vector>
+#include <vulkan/vulkan_core.h>
 
 namespace lve {
 
-struct PipelineConfigInfo {};
+struct PipelineConfigInfo {
+        VkViewport viewport;
+        VkRect2D scissor;
+        VkPipelineInputAssemblyStateCreateInfo inputAssemblyInfo;
+        VkPipelineRasterizationStateCreateInfo rasterizationInfo;
+        VkPipelineMultisampleStateCreateInfo multisampleInfo;
+        VkPipelineColorBlendAttachmentState colorBlendAttachment;
+        VkPipelineColorBlendStateCreateInfo colorBlendInfo;
+        VkPipelineDepthStencilStateCreateInfo depthStencilInfo;
+        VkPipelineLayout pipelineLayout = nullptr;
+        VkRenderPass renderPass = nullptr;
+        uint32_t subpass = 0;
+};
 class LvePipeline {
     public:
         LvePipeline(LveDevice &device, const std::string &vertFilePath,
                     const std::string &fragFilePath,
                     const PipelineConfigInfo &configInfo);
-        ~LvePipeline() {}
+        ~LvePipeline();
 
         LvePipeline(const LvePipeline &) = delete;
         void operator=(const LvePipeline &) = delete;
