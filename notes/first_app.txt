@@ -1,0 +1,42 @@
+// Header:
+    #pragma once
+        // Prevent multiple inclusions
+
+    #include "lve_window.hpp"
+    #include <GLFW/glfw3.h>
+
+    namespace lve {
+        class FirstApp {
+
+            public:
+                static constexpr int WIDTH = 800;
+                static constexpr int HEIGHT = 600;
+                    / Width and height
+
+                LveWindow(const LveWindow &) = delete;
+                LveWindow &operator=(const LveWindow &) = delete;
+                    // Deletes copy constructor (a constuctor that makes a new object that is a copy of an old one of the same class). For this project, resource creaton will happen when variables 
+                    // are initialized, cleanups are conformed by the constructors. So in this case, the copy constructor is destroyed because since is uses the date from the original object,
+                    // it would create a second LveWindow object with the same pointer to the existing glfwWindow that the first does, which is bad because if that were to happen and one of 
+                    // the deconstructers were called, there would be a dangling pointer to the glfwWindow (which has been terminated).
+
+                void run();
+
+            private:
+                LveWindow lveWindow{WIDTH, HEIGHT, "Hello Vulkan!"};
+                    // Initialise the window
+       };
+    } // namespace lve
+
+// CPP:
+    #include "first_app.hpp"
+    #include <GLFW/glfw3.h>
+
+    namespace lve {
+        void FirstApp::run() {
+            while (!lveWindow.shouldClose()) {
+                glfwPollEvents();
+                }
+                    // While the user hasnt tried to close, detect keyboard presses, mouse clicks, etc.
+            }
+        } // namespace lve

@@ -1,9 +1,11 @@
 #pragma once
 
 #include "lve_window.hpp"
+#include <GLFW/glfw3.h>
 
 namespace lve {
 class FirstApp {
+
     public:
         static constexpr int WIDTH = 800;
         static constexpr int HEIGHT = 600;
