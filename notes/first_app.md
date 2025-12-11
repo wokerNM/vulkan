@@ -1,5 +1,6 @@
 // Header:
-    #pragma once
+```cpp
+#pragma once
         // Prevent multiple inclusions
 
     #include "lve_window.hpp"
@@ -27,9 +28,11 @@
                     // Initialise the window
        };
     } // namespace lve
+```
 
 // CPP:
-    #include "first_app.hpp"
+```cpp
+#include "first_app.hpp"
     #include <GLFW/glfw3.h>
 
     namespace lve {
@@ -40,3 +43,4 @@
                     // While the user hasnt tried to close, detect keyboard presses, mouse clicks, etc.
             }
         } // namespace lve
+```    
