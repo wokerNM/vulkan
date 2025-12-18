@@ -1,32 +1,33 @@
-#include "first_app.hpp"
+#include "app.hpp"
+#include "glfw_backend.hpp"
+#include "logger.hpp"
+#include "renderer.hpp"
+#include <atomic>
+#include <thread>
 
-#include <cstdlib>
-#include <iostream>
-#include <stdexcept>
-#include <unistd.h>
+void spawn_render_thread(GLFWwindow *window, std::atomic<bool> *done) {
+	Engine *engine = new Engine(window);
+
+	while (!*done) {
+		// Do work repeatedly!
+	}
+
+	delete engine;
+}
 
 int main() {
-    lve::FirstApp app{};
+	Logger *logger = Logger::get_logger();
+	logger->set_mode(true);
 
-    char cwd[1024];
-    if (getcwd(cwd, sizeof(cwd)) != NULL) {
-        std::cout << "Current working directory: " << cwd << std::endl;
-    } else {
-        perror("getcwd() error");
-    }
+	int width = 800, height = 600;
+	GLFWwindow *window = build_window(width, height, "ID Tech 12");
 
-    try {
-        app.run();
-        char cwd[1024];
-        if (getcwd(cwd, sizeof(cwd)) != NULL) {
-            std::cout << "Current working directory after running: " << cwd
-                      << std::endl;
-        } else {
-            perror("getcwd() error");
-        }
-    } catch (const std::exception &e) {
-        std::cerr << e.what() << '\n';
-        return EXIT_FAILURE;
-    }
-    return EXIT_SUCCESS;
+	std::atomic<bool> done = false;
+	std::thread render_thread(spawn_render_thread, window, &done);
+	App *app = new App(window);
+
+	done = true;
+	render_thread.join();
+	glfwTerminate();
+	return 0;
 }
